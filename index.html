@@ -12,9 +12,15 @@
 </head>
 
 <body>
+  <div class='signin'>
+    <form class='form-container' type='submit'>
+      <label for='username'>Enter your username: </label>
+      <input type='text' id='username' required>
+      <button type='button' class='btn username'>Go</button>
+    </form>  
+  </div>
   <button class='open-button' onclick='openForm()'>New Book</button>
   <table id='library'>
-    <th>Book ID</th>
     <th>Title</th>
     <th>Author</th>
     <th>Pages</th>
@@ -37,11 +43,34 @@
       <label for="read"><b>Read</b></label>
       <input id='read' type="checkbox" name="read" required>
   
-      <button type="submit" class="btn add" onclick="submitForm()">Add</button>
-      <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+      <button type="button" class="btn add" onclick="submitForm()">Add</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
     </form>
   </div>
 
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-database.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyC9HP3by7hUxJ56wmp9Vr9z-Fcq4VIogG0",
+      authDomain: "library-57fa3.firebaseapp.com",
+      projectId: "library-57fa3",
+      storageBucket: "library-57fa3.appspot.com",
+      messagingSenderId: "637794373288",
+      appId: "1:637794373288:web:7c3d48b21b556e7303bc9d",
+      measurementId: "G-N7Y83WCMPL"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   <script src="script.js"></script>
 </body>
 
