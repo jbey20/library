@@ -10,8 +10,8 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-Book.prototype.toggleRead = function () {
-  //add in checkbox listener at bottom of page that calls this to change the .checked property
+Book.prototype.toggleRead = function (book) {
+  book.checked == true ? book.checked = false : book.checked = true;
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -78,7 +78,7 @@ function displayLibrary() {
     readCheck.name = "read";
     readCheck.value = `${read}`;
     readCheck.checked = read;
-    readCheck.id = "id";
+    readCheck.setAttribute('data-index', i);
     readCell.appendChild(readCheck);
   }
   
@@ -110,6 +110,20 @@ function write() {
   )
 }
 
+function addCheckboxListeners() {
+  const checkboxes = document.querySelectorAll('input[type=checkbox][name=read]');
+  console.log(checkboxes);
+  checkboxes.forEach( checkbox => {
+    checkbox.addEventListener('click', e => {
+      const index = e.target.getAttribute('data-index');
+      console.log(index);
+      toggleRead(myLibrary[index]);
+    })
+  })
+}
+
+
+
 
 
 //change arrow function to call the displayLibrary stuff, etc.
@@ -120,4 +134,7 @@ function write() {
 const btn = document.querySelector('.username');
 btn.addEventListener('click', () => {
   getUser();
+  addCheckboxListeners();
 });
+
+
