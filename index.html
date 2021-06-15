@@ -13,10 +13,10 @@
 
 <body>
   <div class='signin'>
-    <form class='form-container' type='submit'>
+    <form class='form-container' id='signin' type='submit' onsubmit='return false'>
       <label for='username'>Enter your username: </label>
       <input type='text' id='username' required>
-      <button type='button' class='btn username'>Go</button>
+      <button type='submit' class='btn username'>Go</button>
     </form>  
   </div>
   <button class='open-button' onclick='openForm()'>New Book</button>

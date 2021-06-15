@@ -10,8 +10,10 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-Book.prototype.toggleRead = function (book) {
-  book.checked == true ? book.checked = false : book.checked = true;
+
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+  write();
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -93,15 +95,24 @@ function getUser() {
       myLibrary = [];
       for (let i = 0; i < snapshot.val().length; i++) {
         console.log(snapshot.val()[i]);
-        myLibrary.push(snapshot.val()[i]);
+        myLibrary.push(readFromFirebase(snapshot.val()[i]));
       }
       displayLibrary();
+      addCheckboxListeners();
     } else {
       alert("User not found");
     }
   }).catch((error) => {
     console.error(error);
   });
+}
+
+function readFromFirebase (Object) {
+  const title = Object.title;
+  const author = Object.author;
+  const pages = Object.pages;
+  const read = Object.read;
+  return new Book(title, author, pages, read);
 }
 
 function write() {
@@ -114,27 +125,20 @@ function addCheckboxListeners() {
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=read]');
   console.log(checkboxes);
   checkboxes.forEach( checkbox => {
-    checkbox.addEventListener('click', e => {
+    checkbox.addEventListener('click', (e) => {
       const index = e.target.getAttribute('data-index');
       console.log(index);
-      toggleRead(myLibrary[index]);
+      myLibrary[index].toggleRead();
+      console.log(myLibrary[index]);
     })
   })
 }
 
 
 
-
-
-//change arrow function to call the displayLibrary stuff, etc.
-//dbRefObject.on('value', snap => console.log(snap.val()));
-// addBookToLibrary('The Hobbit', 'JRR Tolkien', 100, true);
-// console.log(myLibrary);
-
-const btn = document.querySelector('.username');
-btn.addEventListener('click', () => {
+const btn = document.querySelector('#signin');
+btn.addEventListener('submit', () => {
   getUser();
-  addCheckboxListeners();
 });
 
 
