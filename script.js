@@ -16,6 +16,7 @@ Book.prototype.toggleRead = function () {
   write();
 }
 
+
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
@@ -60,7 +61,16 @@ function displayLibrary() {
     const titleCell = newRow.insertCell(-1);
     const title = myLibrary[i].title;
     const titleText = document.createTextNode(`${title}`);
+    // const titleText = document.createElement('p');
+    // titleText.textContent = `${title}`;
     titleCell.appendChild(titleText);
+    const closex = document.createElement('button');
+    closex.type = 'submit';
+    closex.classList.add('closeBtn');
+    closex.onclick = false;
+    closex.textContent = 'X';
+    closex.setAttribute('data-index', i);
+    titleCell.appendChild(closex);
         
     const authorCell = newRow.insertCell(-1);
     const author = myLibrary[i].author;
@@ -99,6 +109,7 @@ function getUser() {
       }
       displayLibrary();
       addCheckboxListeners();
+      addDeleteListeners();
     } else {
       alert("User not found");
     }
@@ -134,11 +145,26 @@ function addCheckboxListeners() {
   })
 }
 
+function addDeleteListeners () {
+  const btns = document.querySelectorAll('.closeBtn');
+  console.log(btns);
+  btns.forEach( btn => {
+    btn.addEventListener('click', (e) => {
+      const index = e.target.getAttribute('data-index');
+      console.log(index);
+      myLibrary.splice(index,1)
+      console.log(myLibrary[index]);
+      write();
+      displayLibrary();
+    })
+  })
+}
 
 
 const btn = document.querySelector('#signin');
 btn.addEventListener('submit', () => {
   getUser();
 });
+
 
 

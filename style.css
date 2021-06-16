@@ -5,7 +5,7 @@
 #library {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  font-size: 30px;
 }
 
 #library td, #library th {
@@ -97,3 +97,23 @@
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
+.closeBtn {
+  float: right;
+  margin-right: 1em;
+  margin-left: 1em;
+  color: white;
+  font-weight: 1000;
+  background-color: rgb(209, 21, 21);  
+}
+
+table {
+  border-spacing: 0px;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 50%;
+  float: left;
+}
+
+
