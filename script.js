@@ -3,22 +3,25 @@ let bookID = 1;
 let user = '';
 let dbRefObject 
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
 
+class Book {
+  constructor (title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
-  write();
+  toggleRead() {
+    this.read = !this.read;
+    write();
+  }
 }
 
 
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
+  console.log(book);
   myLibrary.push(book);
 }
 
@@ -59,6 +62,7 @@ function displayLibrary() {
     const newRow = shelf.insertRow(-1);
     
     const titleCell = newRow.insertCell(-1);
+    console.log(myLibrary[i].title);
     const title = myLibrary[i].title;
     const titleText = document.createTextNode(`${title}`);
     // const titleText = document.createElement('p');
